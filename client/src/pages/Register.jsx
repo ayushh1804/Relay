@@ -1,12 +1,13 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { registerRoute } from "../utils/APIROUTES";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
-import axios from "axios"
+import { registerRoute } from "../utils/APIROUTES";
 const Register = () => {
+  const navigate = useNavigate()
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -22,7 +23,7 @@ const Register = () => {
   };
   const handleValidation = () => {
     const { password, confirmpassword, username, email } = values;
-   
+
     if (password !== confirmpassword) {
       toast.error(
         "Password and confirm password should be same.",
@@ -58,10 +59,18 @@ const Register = () => {
         email,
         password,
       });
-
+      if (data.status === false) {
+        toast.error(data.msg, toastOptions);
+      }
+      if (data.status === true) {
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(data.user)
+        );
+       navigate('/')
+      }
     }
   };
-  
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
