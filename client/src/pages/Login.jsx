@@ -12,6 +12,13 @@ const Login = () => {
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
+    }
+  }, []);
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -45,10 +52,7 @@ const Login = () => {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         navigate("/");
       }
     }
@@ -87,7 +91,8 @@ const Login = () => {
 
           <button type="submit">Login</button>
           <span>
-            Don't have an account, Register Here <Link to="/register">Register</Link>
+            Don't have an account, Register Here{" "}
+            <Link to="/register">Register</Link>
           </span>
         </form>
       </FormContainer>

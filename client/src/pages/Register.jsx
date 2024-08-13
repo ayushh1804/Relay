@@ -7,13 +7,18 @@ import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import { registerRoute } from "../utils/APIROUTES";
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmpassword: "",
   });
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
+    }
+  }, []);
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -64,10 +69,10 @@ const Register = () => {
       }
       if (data.status === true) {
         localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
+          "chat-app-user",
           JSON.stringify(data.user)
         );
-       navigate('/')
+        navigate("/");
       }
     }
   };
