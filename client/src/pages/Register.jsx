@@ -16,7 +16,7 @@ const Register = () => {
   });
   useEffect(() => {
     if (localStorage.getItem("chat-app-user")) {
-      navigate("/");
+      navigate("/chat");
     }
   }, []);
   const toastOptions = {

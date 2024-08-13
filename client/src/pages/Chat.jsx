@@ -37,11 +37,13 @@ const Chat = () => {
     }
     f();
   }, [currentUser]);
-
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
   return (
     <Container>
       <div className="container">
-        <Contacts contacts ={contact}/>
+        <Contacts contacts ={contact} changeChat={handleChatChange}/>
       </div>
     </Container>
   );
