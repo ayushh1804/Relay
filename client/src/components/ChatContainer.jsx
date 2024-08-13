@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Logout from "./Logout";
 const ChatContainer = ({ currentChat }) => {
   return (
     <>
@@ -14,9 +15,10 @@ const ChatContainer = ({ currentChat }) => {
                 />
               </div>
               <div className="username">
-            <h3>{currentChat.username}</h3>
-          </div>
+                <h3>{currentChat.username}</h3>
+              </div>
             </div>
+            <Logout />
           </div>
           <div className="chat-message"></div>
           <div className="chat-input"></div>
