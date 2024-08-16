@@ -9,7 +9,7 @@ const Contacts = ({ contacts, changeChat }) => {
   useEffect( () => {
    async function f(){
         const data = await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            localStorage.getItem("chat-app-user")
           );
           setCurrentUserName(data.username);
           setCurrentUserImage(data.avatarImage);

@@ -9,7 +9,7 @@ export default function Logout() {
   const handleClick = async () => {
     try {
       const id = await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        localStorage.getItem("chat-app-user")
       )._id;
       const data = await axios.get(`${logoutRoute}/${id}`);
       if (data.status === 200) {

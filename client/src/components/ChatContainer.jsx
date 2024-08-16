@@ -1,7 +1,49 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
+import { recieveMessageRoute, sendMessageRoute } from "../utils/APIROUTES";
+import ChatInput from "./ChatInput";
 import Logout from "./Logout";
-const ChatContainer = ({ currentChat }) => {
+import Message from "./Message";
+const ChatContainer = ({ currentChat, currentUser }) => {
+  const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+
+  useEffect(() => {
+    async function f() {
+      const data = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const response = await axios.post(sendMessageRoute, {
+        from: data._id,
+        to: currentChat._id,
+      });
+      setMessages(response.data);
+    }
+    f();
+  }, [currentChat]);
+
+  useEffect(() => {
+    const getCurrentChat = async () => {
+      if (currentChat) {
+        await JSON.parse(localStorage.getItem("chat-app-user"))._id;
+      }
+    };
+    getCurrentChat();
+  }, [currentChat]);
+
+  const handleSendMsg = async (msg) => {
+    const data = await JSON.parse(localStorage.getItem("chat-app-user"));
+    await axios.post(sendMessageRoute, {
+      from: data._id,
+      to: currentChat._id,
+      message: msg,
+    });
+
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    setMessages(msgs);
+  };
   return (
     <>
       {currentChat && (
@@ -20,8 +62,8 @@ const ChatContainer = ({ currentChat }) => {
             </div>
             <Logout />
           </div>
-          <div className="chat-message"></div>
-          <div className="chat-input"></div>
+          <Message />
+          <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
       )}
     </>

@@ -26,7 +26,7 @@ const SetAvatar = () => {
       toast.error("Please select an avatar", toastOptions);
     } else {
       const user = await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        localStorage.getItem("chat-app-user")
       );
 
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
