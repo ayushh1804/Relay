@@ -8,9 +8,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
-      const id = await JSON.parse(
-        localStorage.getItem("chat-app-user")
-      )._id;
+      const id = await JSON.parse(localStorage.getItem("chat-app-user"))._id;
       const data = await axios.get(`${logoutRoute}/${id}`);
       if (data.status === 200) {
         localStorage.clear();
@@ -33,8 +31,9 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
-  border-radius: 0.5rem;
-  background-color: #9a86f3;
+  margin-top: 0.3rem;
+  border-radius: 1rem;
+  background-color: blue;
   border: none;
   cursor: pointer;
   svg {

@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import { loginRoute } from "../utils/APIROUTES";
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("chat-app-user")) {
-      navigate("/chat");
+      navigate("/");
     }
   }, []);
 
@@ -72,7 +72,7 @@ const Login = () => {
         >
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>TalkTrek</h1>
+            <h1>Relay</h1>
           </div>
           <input
             type="text"
@@ -91,8 +91,7 @@ const Login = () => {
 
           <button type="submit">Login</button>
           <span>
-            Don't have an account, Register Here{" "}
-            <Link to="/register">Register</Link>
+            Don't have an account, Register <Link to="/register">Here</Link>
           </span>
         </form>
       </FormContainer>
@@ -109,7 +108,12 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #161616;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
   .brand {
     display: flex;
     align-items: center;
@@ -133,11 +137,8 @@ const FormContainer = styled.div`
     padding: 3rem 5rem;
   }
   input {
-    background-color: transparent;
     padding: 1rem;
-    border: 1px solid #ffffff;
     border-radius: 0.4rem;
-    color: white;
     width: 100%;
     font-size: 1rem;
     &:focus {
@@ -161,7 +162,7 @@ const FormContainer = styled.div`
   }
   span {
     color: white;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     a {
       color: #4e0eff;
       text-decoration: none;

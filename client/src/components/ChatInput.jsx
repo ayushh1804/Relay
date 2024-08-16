@@ -35,7 +35,7 @@ export default function ChatInput({ handleSendMsg }) {
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
-          placeholder="type your message here"
+          placeholder="Type Message..."
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
         />
@@ -63,7 +63,7 @@ const Container = styled.div`
     color: white;
     gap: 1rem;
     .emoji {
-      position: relative;
+      position: absolute;
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
@@ -126,7 +126,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #9a86f3;
+      background-color: blue;
       border: none;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;

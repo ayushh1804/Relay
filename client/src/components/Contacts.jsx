@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 
 const Contacts = ({ contacts, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
-  useEffect( () => {
-   async function f(){
-        const data = await JSON.parse(
-            localStorage.getItem("chat-app-user")
-          );
-          setCurrentUserName(data.username);
-          setCurrentUserImage(data.avatarImage);
+  useEffect(() => {
+    async function f() {
+      const data = await JSON.parse(localStorage.getItem("chat-app-user"));
+      setCurrentUserName(data.username);
+      setCurrentUserImage(data.avatarImage);
     }
     f();
-   
   }, []);
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
@@ -27,7 +24,7 @@ const Contacts = ({ contacts, changeChat }) => {
         <Container>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h3>snappy</h3>
+            <h3>Relay</h3>
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {

@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
-import Logo from "../assets/logo.svg";
+import Logo from "../assets/logo.png";
 import { registerRoute } from "../utils/APIROUTES";
 const Register = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Register = () => {
   });
   useEffect(() => {
     if (localStorage.getItem("chat-app-user")) {
-      navigate("/chat");
+      navigate("/");
     }
   }, []);
   const toastOptions = {
@@ -68,10 +68,7 @@ const Register = () => {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        localStorage.setItem(
-          "chat-app-user",
-          JSON.stringify(data.user)
-        );
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         navigate("/");
       }
     }
@@ -91,7 +88,7 @@ const Register = () => {
         >
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>TalkTrek</h1>
+            <h1>Relay</h1>
           </div>
           <input
             type="text"
@@ -137,7 +134,12 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #161616;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
   .brand {
     display: flex;
     align-items: center;
@@ -161,11 +163,9 @@ const FormContainer = styled.div`
     padding: 3rem 5rem;
   }
   input {
-    background-color: transparent;
     padding: 1rem;
     border: 1px solid #ffffff;
     border-radius: 0.4rem;
-    color: white;
     width: 100%;
     font-size: 1rem;
     &:focus {
@@ -189,7 +189,7 @@ const FormContainer = styled.div`
   }
   span {
     color: white;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     a {
       color: #4e0eff;
       text-decoration: none;
